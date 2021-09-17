@@ -9,29 +9,40 @@ import (
 	"github.com/LaurenceLiZhixin/dubbogo-cli/pkg/k8s"
 	"github.com/spf13/cobra"
 )
+var (
+	imageName    string
+	appName      string
+	appPath      string
+)
 
-var InitCmd = &cobra.Command{
-	Use:   "init",
-	Short: "Install dubbogo relies on k8s",
+var DeployCmd = &cobra.Command{
+	Use:   "deploy",
+	Short: "Deploy dubbogo user service",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := k8s.EnvInit(); err != nil{
+		imageName := "image"
+
+		// build docker
+
+		// publish docker
+
+		// set
+
+		// deploy to k8s
+		if err := k8s.DeployUserSerivce(appPath, appName, imageName); err != nil{
 			panic(err)
 		}
 	},
 }
 
 func init() {
-	//InitCmd.Flags().BoolVarP(&kubernetesMode, "kubernetes", "k", false, "Deploy Dapr to a Kubernetes cluster")
-	//InitCmd.Flags().BoolVarP(&wait, "wait", "", false, "Wait for Kubernetes initialization to complete")
-	//InitCmd.Flags().UintVarP(&timeout, "timeout", "", 300, "The wait timeout for the Kubernetes installation")
-	//InitCmd.Flags().BoolVarP(&slimMode, "slim", "s", false, "Exclude placement service, Redis and Zipkin containers from self-hosted installation")
-	//InitCmd.Flags().StringVarP(&runtimeVersion, "runtime-version", "", "latest", "The version of the Dapr runtime to install, for example: 1.0.0")
-	//InitCmd.Flags().StringVarP(&dashboardVersion, "dashboard-version", "", "latest", "The version of the Dapr dashboard to install, for example: 1.0.0")
+	DeployCmd.Flags().StringVarP(&imageName, "imageName", "", "latest", "image name")
+	DeployCmd.Flags().StringVarP(&appName, "appName", "", "latest", "container name")
+	DeployCmd.Flags().StringVarP(&appPath, "appPath", "", "latest", "container name")
 	//InitCmd.Flags().StringVarP(&initNamespace, "namespace", "n", "dapr-system", "The Kubernetes namespace to install Dapr in")
 	//InitCmd.Flags().BoolVarP(&enableMTLS, "enable-mtls", "", true, "Enable mTLS in your cluster")
 	//InitCmd.Flags().BoolVarP(&enableHA, "enable-ha", "", false, "Enable high availability (HA) mode")
 	//InitCmd.Flags().String("network", "", "The Docker network on which to deploy the Dapr runtime")
 	//InitCmd.Flags().BoolP("help", "h", false, "Print this help message")
 	//InitCmd.Flags().StringArrayVar(&values, "set", []string{}, "set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)")
-	dubbogoRootCMD.AddCommand(InitCmd)
+	dubbogoRootCMD.AddCommand(DeployCmd)
 }

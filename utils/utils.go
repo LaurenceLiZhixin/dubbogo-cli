@@ -43,3 +43,19 @@ func RunCmdAndWait(name string, args ...string) (string, error) {
 
 	return string(resp), nil
 }
+
+func RunCmd(name string, args ...string) error {
+	cmd := exec.Command(name, args...)
+
+	_, err := cmd.StdoutPipe()
+	if err != nil {
+		return  err
+	}
+
+	err = cmd.Start()
+	if err != nil {
+		return  err
+	}
+
+	return  nil
+}

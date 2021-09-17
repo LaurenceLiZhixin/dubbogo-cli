@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="deploy" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="dubbogo-cli" />
+    <working_directory value="$PROJECT_DIR$" />
+    <parameters value="deploy --configDataID helloworld --configPath $PROJECT_DIR$/../dubbo-go-samples/helloworld/go-server/conf/dubbogo.yml" />
+    <envs>
+      <env name="KUBECONFIG" value="$USER_HOME$/ack-kubeconfig/dubbo-go/config" />
+    </envs>
+    <kind value="PACKAGE" />
+    <package value="github.com/LaurenceLiZhixin/dubbogo-cli" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/main.go" />
+    <method v="2" />
+  </configuration>
+</component>

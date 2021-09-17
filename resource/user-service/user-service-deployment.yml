@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dubbogo-nacos
+  namespace: dubbogo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dubbogo-nacos
+  template:
+    metadata:
+      labels:
+        app: dubbogo-nacos
+        dubbogo-registry: nacos
+    spec:
+      containers:
+        - image: nacos/nacos-server:1.2.0
+          name: server
+          ports:
+            - name: nacos
+              containerPort: 8848
+              protocol: TCP
+          env:
+            - name: PREFER_HOST_MODE
+              value: hostname
+            - name: MODE
+              value: standalone
